@@ -30,3 +30,4 @@ streamlit.text("Hello from Snowflake:")
 streamlit.text(my_data_row)
 
 import snowflake.connector 
+ 
