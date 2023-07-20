@@ -42,3 +42,27 @@ streamlit.dataframe(fruits_to_show)
     return fruityvice_normalized
 
 
+streamlit.header("Fruityvice Fruit Advice!")
+try:
+    fruit_choice = streamlit.text_input('What fruit would you like information about?')
+    if not fruit_choice:
+        streamlit.error("Please select a fruit to get information.")
+    else:
+        back_from_function = get_fruityvice_data(fruit_choice)
+        streamlit.dataframe(back_from_function)
+except URLError as e:
+    streamlit.error("Error: Unable to fetch data from Fruityvice API.")
+
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        query = "INSERT INTO fruit_load_list (fruit_column_name) VALUES (%s)"
+        my_cur.execute(query, (new_fruit,))
+        my_cnx.commit()
+    return "Thanks for adding " + new_fruit
+
+
+add_my_fruit = streamlit.text_input('What fruit would you like to add?')
+if streamlit.button('Get Fruit List'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    back_from_function = insert_row_snowflake(add_my_fruit)
+    streamlit.text(back_from_function)
