@@ -15,7 +15,7 @@ conn = snowflake.connector.connect(
 )
 
 # Streamlit user interface
-data_to_upload = st.text_input("ISO_Countries_UTF8_pipe(1).csv")
+data_to_upload = st.text_input("ISO_Countries_UTF8_pipe(1).csv:")
 submit_button = st.button("Upload to Snowflake")
 
 if submit_button and data_to_upload:
