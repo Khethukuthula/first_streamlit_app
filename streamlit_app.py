@@ -6,7 +6,7 @@ st.title("Upload Data to Snowflake")
 
 # Snowflake connection setup
 conn = snowflake.connector.connect(
-    user='mhlongo',
+    user='Mhlongo',
     password='Khetha370',
     account='IU52295.ca-central-1.aws.snowflakecomputing.com',
     warehouse='INTL_WH',
